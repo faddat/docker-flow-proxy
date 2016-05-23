@@ -30,7 +30,7 @@ docker-machine create -d scaleway \
 
 docker-machine create -d scaleway \
 	--scaleway-token=624f3764-fbd4-4677-8ae4-5750ccce37af \
-        --scaleway-organization=16fdd6a4-7492-4d18-a334-51eaf17a4f7d 
+        --scaleway-organization=16fdd6a4-7492-4d18-a334-51eaf17a4f7d \
     	--swarm \
     	--swarm-discovery="consul://$CONSUL_IP:8500" \
     	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
