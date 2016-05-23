@@ -2,7 +2,7 @@
 
 set -e
 
-docker-machine create -d virtualbox proxy
+docker-machine create -d scaleway proxy
 
 export DOCKER_IP=$(docker-machine ip proxy)
 
@@ -16,26 +16,32 @@ sleep 2
 
 docker-compose up -d proxy
 
-docker-machine create -d virtualbox \
-    --swarm --swarm-master \
-    --swarm-discovery="consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-advertise=eth1:2376" \
-    swarm-master
+docker-machine create -d scaleway \
+	--scaleway-token=624f3764-fbd4-4677-8ae4-5750ccce37af \
+	--scaleway-organization=16fdd6a4-7492-4d18-a334-51eaf17a4f7d \
+    	--swarm --swarm-master \
+    	--swarm-discovery="consul://$CONSUL_IP:8500" \
+    	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
+    	--engine-opt="cluster-advertise=eth1:2376" \
+    	swarm-master
 
-docker-machine create -d virtualbox \
-    --swarm \
-    --swarm-discovery="consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-advertise=eth1:2376" \
-    swarm-node-1
+docker-machine create -d scaleway \
+	--scaleway-token=624f3764-fbd4-4677-8ae4-5750ccce37af \
+        --scaleway-organization=16fdd6a4-7492-4d18-a334-51eaf17a4f7d 
+    	--swarm \
+    	--swarm-discovery="consul://$CONSUL_IP:8500" \
+    	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
+    	--engine-opt="cluster-advertise=eth1:2376" \
+    	swarm-node-1
 
-docker-machine create -d virtualbox \
-    --swarm \
-    --swarm-discovery="consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-    --engine-opt="cluster-advertise=eth1:2376" \
-    swarm-node-2
+docker-machine create -d scaleway \
+        --scaleway-token=624f3764-fbd4-4677-8ae4-5750ccce37af \
+        --scaleway-organization=16fdd6a4-7492-4d18-a334-51eaf17a4f7d \
+        --swarm \
+	--swarm-discovery="consul://$CONSUL_IP:8500" \
+	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
+	--engine-opt="cluster-advertise=eth1:2376" \
+   	 swarm-node-2
 
 eval "$(docker-machine env swarm-master)"
 
