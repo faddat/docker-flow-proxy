@@ -8,7 +8,7 @@ docker-machine create -d scaleway         \
 proxy
 
 export DOCKER_IP=$(docker-machine ip proxy)
-
+export CONSUL_SERVER_IP=$(docker-machine ip proxy)
 export CONSUL_IP=$(docker-machine ip proxy)
 
 eval "$(docker-machine env proxy)"
