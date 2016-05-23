@@ -25,7 +25,7 @@ docker-machine create -d scaleway \
     	--swarm --swarm-master \
     	--swarm-discovery="consul://$CONSUL_IP:8500" \
     	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-    	--engine-opt="cluster-advertise=eth1:2376" \
+    	--engine-opt="cluster-advertise=eth0:2376" \
     	swarm-master
 
 docker-machine create -d scaleway \
@@ -34,7 +34,7 @@ docker-machine create -d scaleway \
     	--swarm \
     	--swarm-discovery="consul://$CONSUL_IP:8500" \
     	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-    	--engine-opt="cluster-advertise=eth1:2376" \
+    	--engine-opt="cluster-advertise=eth0:2376" \
     	swarm-node-1
 
 docker-machine create -d scaleway \
@@ -43,7 +43,7 @@ docker-machine create -d scaleway \
         --swarm \
 	--swarm-discovery="consul://$CONSUL_IP:8500" \
 	--engine-opt="cluster-store=consul://$CONSUL_IP:8500" \
-	--engine-opt="cluster-advertise=eth1:2376" \
+	--engine-opt="cluster-advertise=eth0:2376" \
    	 swarm-node-2
 
 eval "$(docker-machine env swarm-master)"
